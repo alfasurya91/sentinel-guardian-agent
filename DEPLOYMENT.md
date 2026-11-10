@@ -1,11 +1,23 @@
 # Sentinel — deployment record
 
-## BSC testnet (chainId 97) — ⏳ PENDING FAUCET
+## BSC testnet (chainId 97) — ✅ DEPLOYED 2026-11-10
 
 - Disposable deployer (testnet-only, generated for this project):
   `0x9858d01522CdfFADC6022fc20cDf68988e339a3D`
   (private key lives only in `.env.local`, chmod 600, gitignored)
-- Balance at last check (2026-11-10): **0 tBNB**
+- Funded by the user via the official faucet 2026-11-10: **0.03 tBNB**
+- **SentinelRegistry: `0x641E21b0A53872f6D11534783cdA825C001bCa4a`**
+  Explorer: https://testnet.bscscan.com/address/0x641E21b0A53872f6D11534783cdA825C001bCa4a
+
+| Step | Tx hash |
+|---|---|
+| Deploy SentinelRegistry | `0xcd1046316d13941b1c249ac49a1f9b735f4afa71b49a2db3319c7152472090eb` |
+| `setOperator(deployer, true)` | `0xb24b51c033d2033dd9e57f1dcec1c65afd8c43e96ced93f9d5334ea4e33915bb` |
+| `setPolicy(freeOnly=true, paused=false, maxValuePerTx=0, dailyTxCap=5)` | `0x43f35a175707e5c7d09c72d2443b83c8fc76ba6919ab5ed06054977a500f0c0c` |
+| `logDecision(user wallet, Agent Ape Club, MINT, BLOCK, SIMULATION_FAILED)` | `0xd215bb2957fbdbbb86a0c38cbde6841d707953e43af83064078ecc999b2b9091` |
+
+Read-back verified on-chain: decisionsCount = 1; getPolicy(deployer) = (exists, freeOnly=true, paused=false, 0, 5).
+Tooling note: BSC testnet enforces a minimum priority fee (0.1 gwei tip) that cast 1.9.0's default EIP-1559 estimation violates (tip cap 1 wei) — sends must use `--legacy --gas-price 1000000000`.
 - Faucets attempted from this environment:
   - BNB Chain official testnet faucet — web UI, captcha-gated
   - QuickNode BSC testnet faucet — returns the web UI (captcha-gated), no API drip
