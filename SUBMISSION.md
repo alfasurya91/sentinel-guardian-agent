@@ -43,7 +43,7 @@ Sentinel correctly BLOCKS the still-closed Agent Ape Club free mint
 Agents whose free quotas that wallet already used — three transactions a
 naive agent would have wasted or misspent, reduced to zero.
 
-**Repo:** [GitHub URL — to be added after push]
+**Repo:** https://github.com/alfasurya91/sentinel-guardian-agent
 **Demo video:** [link — to be recorded, script below]
 **Contract (BSC testnet):** [address — deploy pending faucet funding of the
 disposable deployer 0x9858d01522CdfFADC6022fc20cDf68988e339a3D; local anvil
@@ -60,7 +60,7 @@ deployment on chain-id 97 is complete, see DEPLOYMENT.md]
 >
 > Verify first. Execute second. Log everything. #BNBHack
 >
-> [repo link] [demo link]
+> https://github.com/alfasurya91/sentinel-guardian-agent [demo link]
 
 ## Demo video script (90 seconds, owner records)
 
