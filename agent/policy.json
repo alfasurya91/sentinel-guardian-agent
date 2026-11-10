@@ -1,0 +1,1 @@
+{"comment":"Local mirror of the on-chain SentinelRegistry policy for the guarded wallet. These are the user's real Safety Rails, as configured for his Agentic Wallet work: free-only, no value per tx, small daily cap, fail closed. On BSC testnet the same evaluation runs inside SentinelRegistry.evaluate().","dailyTxCap":5,"freeOnly":true,"maxValuePerTxWei":"0","paused":false}

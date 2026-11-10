@@ -1,0 +1,157 @@
+{
+  "product": "Sentinel — Agent ID wallet guardian",
+  "mode": "DRY-RUN (read-only). Nothing was signed or broadcast.",
+  "chain": "BNB Smart Chain mainnet (chainId 56)",
+  "generatedAt": "2026-11-10T05:10:40.063Z",
+  "wallet": "0x16c3a45B80A27F81e511D04610C7726a0aa2098c",
+  "policy": {
+    "comment": "Local mirror of the on-chain SentinelRegistry policy for the guarded wallet. These are the user's real Safety Rails, as configured for his Agentic Wallet work: free-only, no value per tx, small daily cap, fail closed. On BSC testnet the same evaluation runs inside SentinelRegistry.evaluate().",
+    "dailyTxCap": 5,
+    "freeOnly": true,
+    "maxValuePerTxWei": "0",
+    "paused": false
+  },
+  "results": [
+    {
+      "id": "agent-ape-club",
+      "name": "Agent Ape Club — free mint (LIVE watch)",
+      "contract": "0x31da612e74db1751f0B474b4607493B4fa4d9bd5",
+      "kind": "MINT",
+      "watchStatus": "pending",
+      "checks": [
+        {
+          "name": "code_exists",
+          "status": "pass",
+          "evidence": "7513 bytes of bytecode at 0x31da612e74db1751f0B474b4607493B4fa4d9bd5"
+        },
+        {
+          "name": "verified_source",
+          "status": "pass",
+          "evidence": "Sourcify match=exact_match, verifiedAt=2026-10-25T12:19:04Z"
+        },
+        {
+          "name": "quota",
+          "status": "pass",
+          "evidence": "balanceOf(address) = 0 (fail if > 0)"
+        },
+        {
+          "name": "price",
+          "status": "pass",
+          "evidence": "call value 0 wei within policy (freeOnly=true)"
+        },
+        {
+          "name": "simulation",
+          "status": "fail",
+          "reason": "SIMULATION_FAILED",
+          "evidence": "eth_call freeMint(uint256,uint256) reverted with MintClosed() (0x589ed34b)"
+        },
+        {
+          "name": "policy",
+          "status": "pass",
+          "evidence": "freeOnly=true, maxValuePerTx=0 wei, daily cap 0/5 used"
+        },
+        {
+          "name": "baw_preview",
+          "status": "skip",
+          "evidence": "not reached — pipeline already BLOCKED at 'simulation'. In dry-run the wallet preview only runs for fully passing opportunities."
+        }
+      ],
+      "verdict": "BLOCK",
+      "reason": "SIMULATION_FAILED"
+    },
+    {
+      "id": "niche-society",
+      "name": "Niche Society — free mints #1–2 (historical demo)",
+      "contract": "0xA522C9257BB00B832f49f550e25e790Ace0Be585",
+      "kind": "MINT",
+      "watchStatus": "historical",
+      "checks": [
+        {
+          "name": "code_exists",
+          "status": "pass",
+          "evidence": "12123 bytes of bytecode at 0xA522C9257BB00B832f49f550e25e790Ace0Be585"
+        },
+        {
+          "name": "verified_source",
+          "status": "pass",
+          "evidence": "Sourcify match=exact_match, verifiedAt=2026-10-29T00:34:53Z"
+        },
+        {
+          "name": "quota",
+          "status": "fail",
+          "reason": "QUOTA_USED",
+          "evidence": "free quota consumed: mintedBy(wallet) vs free allowance of 2 — mintedBy(address) = 2 (fail if >= 2)"
+        },
+        {
+          "name": "price",
+          "status": "skip",
+          "evidence": "no mint call configured (historical entry)"
+        },
+        {
+          "name": "simulation",
+          "status": "skip",
+          "evidence": "no mint call configured (historical entry)"
+        },
+        {
+          "name": "policy",
+          "status": "pass",
+          "evidence": "freeOnly=true, maxValuePerTx=0 wei, daily cap 0/5 used"
+        },
+        {
+          "name": "baw_preview",
+          "status": "skip",
+          "evidence": "not reached — pipeline already BLOCKED at 'quota'. In dry-run the wallet preview only runs for fully passing opportunities."
+        }
+      ],
+      "verdict": "BLOCK",
+      "reason": "QUOTA_USED"
+    },
+    {
+      "id": "night-shift-agents",
+      "name": "Night Shift Agents — first mint free (historical demo)",
+      "contract": "0x427aed3f7427b48e45f5e648105aa1b77724cf14",
+      "kind": "MINT",
+      "watchStatus": "historical",
+      "checks": [
+        {
+          "name": "code_exists",
+          "status": "pass",
+          "evidence": "16072 bytes of bytecode at 0x427aed3f7427b48e45f5e648105aa1b77724cf14"
+        },
+        {
+          "name": "verified_source",
+          "status": "pass",
+          "evidence": "Sourcify match=exact_match, verifiedAt=2026-10-26T17:23:06Z"
+        },
+        {
+          "name": "quota",
+          "status": "fail",
+          "reason": "QUOTA_USED",
+          "evidence": "wallet already holds this NFT (free first-mint slot spent) — balanceOf(address) = 1 (fail if > 0)"
+        },
+        {
+          "name": "price",
+          "status": "skip",
+          "evidence": "no mint call configured (historical entry)"
+        },
+        {
+          "name": "simulation",
+          "status": "skip",
+          "evidence": "no mint call configured (historical entry)"
+        },
+        {
+          "name": "policy",
+          "status": "pass",
+          "evidence": "freeOnly=true, maxValuePerTx=0 wei, daily cap 0/5 used"
+        },
+        {
+          "name": "baw_preview",
+          "status": "skip",
+          "evidence": "not reached — pipeline already BLOCKED at 'quota'. In dry-run the wallet preview only runs for fully passing opportunities."
+        }
+      ],
+      "verdict": "BLOCK",
+      "reason": "QUOTA_USED"
+    }
+  ]
+}

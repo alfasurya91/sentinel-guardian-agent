@@ -1,0 +1,10 @@
+[profile.default]
+src = "contracts"
+out = "out"
+libs = ["lib"]
+test = "test"
+solc_version = "0.8.24"
+
+[rpc_endpoints]
+bsc_testnet = "https://bsc-testnet-rpc.publicnode.com"
+bsc = "https://bsc.drpc.org"
