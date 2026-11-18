@@ -1,0 +1,15 @@
+{
+  "breaker": "0xAb21f451c83B1DfF52B8cA4795c509a7B388061e",
+  "decisionTopic0": "0x7e17a9c86e011e7e110d42ad938ba16ea8471b61881522d86334e7a47d2c90b6",
+  "deployer": "0x0b71114B48693Ca3D40d7e644aDF6eb0676AF690",
+  "lasnaChainId": 5318007,
+  "lasnaFaucetSepolia": "0x9b9BB25f1A81078C544C829c5EB7822d747Cf434",
+  "lasnaRpc": "https://lasna-rpc.rnk.dev/",
+  "lasnaSystemContract": "0x8888888888888888888888888888888888888888",
+  "project": "Sentinel x Reactive Omni Buildathon",
+  "reactor": "0xF9dD65a93b286d3F67a1e89720f17861e21247Cf",
+  "registry": "0x05B8B63297FfC9f6AB8B64F830bEc39cCC17B198",
+  "sepoliaCallbackProxy": "0xAa14d9Cd0f788Ca23d11805986C1d8bd035D23b4",
+  "sepoliaChainId": 11155111,
+  "sepoliaRpc": "https://ethereum-sepolia-rpc.publicnode.com"
+}

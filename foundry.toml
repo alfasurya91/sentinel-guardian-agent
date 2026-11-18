@@ -3,8 +3,10 @@ src = "contracts"
 out = "out"
 libs = ["lib"]
 test = "test"
-solc_version = "0.8.24"
+solc_version = "0.8.29" # bumped 2026-11-16 for reactive-lib-omni (^0.8.29); registry (^0.8.24) still compiles under it
 
 [rpc_endpoints]
 bsc_testnet = "https://bsc-testnet-rpc.publicnode.com"
 bsc = "https://bsc.drpc.org"
+sepolia = "https://ethereum-sepolia-rpc.publicnode.com"
+lasna = "https://lasna-rpc.rnk.dev/"

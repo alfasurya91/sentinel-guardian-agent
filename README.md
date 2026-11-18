@@ -78,6 +78,54 @@ Three blocks might look like "nothing happened" — that *is* the product.
 A naive agent would have sent three transactions: one revert, two paid mints
 the owner never approved. Sentinel sent zero.
 
+## Reactive Omni Buildathon — the circuit-breaker (Nov 2026)
+
+Sentinel's second life: a **Reactive** integration for the
+[Reactive Omni Buildathon](https://dorahacks.io/hackathon/reactive-omni-buildathon)
+(Nov 5 – Dec 5 2026, track **"Reactive Meets AI"**). The AI is part of the
+running system — it produces the verdicts the reactive contract reacts to,
+and it obeys the breaker the reactive contract trips.
+
+**The loop (Sepolia → Lasna → Sepolia, testnet only):** the agent logs a
+verdict to `SentinelRegistry` on Sepolia → `SentinelReactor` on Reactive
+Lasna subscribes to `DecisionLogged` and routes it → a callback lands on
+`SentinelBreaker` (Sepolia), which appends the alert and sets `halted=true`
+on a threat verdict (BLOCK + `NOT_FREE` / `SIMULATION_FAILED` /
+`BLOCKLISTED`). The agent reads `halted()` before every execution and
+refuses while tripped. A polling bot would notice minutes later (or never);
+the reactive contract trips the breaker in ~1 second — and it is the ONLY
+path from a threat verdict to an enforced halt.
+
+**Deployed (testnet):**
+
+| Contract | Chain | Address |
+|---|---|---|
+| SentinelRegistry (origin) | Sepolia 11155111 | `0x05B8B63297FfC9f6AB8B64F830bEc39cCC17B198` |
+| SentinelReactor | Lasna 5318007 | `0xF9dD65a93b286d3F67a1e89720f17861e21247Cf` |
+| SentinelBreaker | Sepolia 11155111 | `0xAb21f451c83B1DfF52B8cA4795c509a7B388061e` |
+
+All three verified on Sourcify (exact_match). Full deploy log, tx hashes and
+the v1 gas-limit failure analysis: [`reactive/RUNLOG.md`](reactive/RUNLOG.md).
+Design: [`REACTIVE-PLAN.md`](REACTIVE-PLAN.md). Demo video script:
+[`reactive/VIDEO-SCRIPT.md`](reactive/VIDEO-SCRIPT.md).
+
+**Proven live, both loops:**
+
+| Demo | Origin (Sepolia) | react() (Lasna) | Callback (Sepolia) | Result |
+|---|---|---|---|---|
+| PASS | `0xbb4c52fb…24236` | `0x3d6a2525…f5706` | `0xe9ef7c89…183aa3` | alertCount=1, halted=false |
+| BLOCK + BLOCKLISTED | `0xaf24db4b…1afb5f` | `0x423bcfa7…211b3` | `0x058dca9d…30e3e5` | alertCount=2, halted=true, reason=10 |
+
+`node agent/reactive-guard.js --guard` exits 2 with
+"HALTED: breaker tripped, reason=10, alerts=2 — refusing to execute."
+The breaker is left halted as demo evidence; the owner can `reset()` it.
+
+> One hard lesson, kept in the code: the first deployment failed with a
+> `CallbackFailure` because the callback gas limit (300k) didn't cover the
+> Sepolia proxy's 200k overhead plus the callback's own ~356k first-call
+> cost. The fix — 700k — is documented in `SentinelReactor.sol` and
+> `reactive/RUNLOG.md`, not hidden.
+
 ## The Safety Rails
 
 Sentinel's policy is not a settings file you have to trust — the canonical
